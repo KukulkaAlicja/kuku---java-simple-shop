@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:include="layout :: master">
+<body>
+<div th:fragment="content">
+    <section>
+        <div th:if="${basket.isEmpty()}"><a th:text="#{general.emptyBasket}"></a></div>
+        <div th:unless="${basket.isEmpty()}">
+            <table>
+                <thead>
+                <tr>
+                    <th th:text="#{product.productId}">id</th>
+                    <th th:text="#{product.productName}">name</th>
+                    <th th:text="#{product.description}">opis</th>
+                    <th th:text="#{product.price}">Price</th>
+                    <th th:text="#{product.available}">Available</th>
+                    <th th:text="#{product.user}">User</th>
+                    <th th:text="#{general.deleteProduct}">Delete Product</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--/*@thymesVar id="basket" type="java.util.Set<pl.kukulka.kukushop.model.Product>"*/-->
+                <tr th:each="product : ${basket}">
+                    <td th:text="${product.productId}"></td>
+                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.available}"></td>
+                    <td th:text="${product.user.login}"></td>
+                    <td><a th:href="@{/user/basket/delete/{id}(id=${product.productId})}">
+                        <button th:text="#{general.deleteProduct}">Delete Product</button>
+                    </a></td>
+                </tr>
+                </tbody>
+            </table>
+            <a href="/user/orderForm" th:text="#{general.order}"></a>
+        </div>
+    </section>
+</div>
+</body>
+</html>

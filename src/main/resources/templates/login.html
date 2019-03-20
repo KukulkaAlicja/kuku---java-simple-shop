@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Wild strawberry</title>
+    <link rel="stylesheet" type="text/css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+
+</head>
+<body>
+<form class="text-center" th:action="@{/login}" method="post">
+    <!--/*@thymesVar id="param" type="java.util.Map"*/-->
+    <div th:if="${param['error']}" class="alert alert-error">
+        Invalid username and password.
+    </div>
+
+    <div th:if="${param['logout']}" class="alert alert-success">
+        You have been logged out.
+    </div>
+
+    <fieldset>
+        <legend th:text="#{general.pleaseLogin}">Please Login</legend>
+
+        <label for="username" th:text="#{user.login}">Login</label>
+        <input type="text" id="username" name="username"/>
+
+        <label for="password" th:text="#{user.password}">Password</label>
+        <input type="password" id="password" name="password"/>
+
+        <span>
+
+    <button type="submit" th:text="#{general.log}">log</button>
+                </span>
+    </fieldset>
+</form>
+
+<a th:href="@{/registry}">
+    <button class="center-block" th:text="#{general.registry}">Registry</button>
+</a>
+<footer class="text-center" id="footer">© 2019 kukulka.pl</footer>
+</body>
+</html>

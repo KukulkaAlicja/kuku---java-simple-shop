@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:include="layout :: master">
+<body>
+<div th:fragment="content">
+    <section>
+
+        <div><a th:href="@{/admin/add}">
+            <button th:text="#{general.add}">Add</button>
+        </a></div>
+        <div id="usersContainer">
+
+            <section th:fragment="usersTable">
+
+                <table>
+                    <!--/*@thymesVar id="users" type="java.util.List<pl.kukulka.kukushop.model.User>"*/-->
+                    <thead>
+                    <tr>
+                        <th th:text="#{user.userId}">Id</th>
+                        <th th:text="#{user.firstname}">Firstname</th>
+                        <th th:text="#{user.lastname}">Lastname</th>
+                        <th th:text="#{user.email}">Email</th>
+                        <th th:text="#{user.login}">Login</th>
+                        <th th:text="#{user.role}">Role</th>
+                        <th th:text="#{user.approved}">Approved</th>
+                        <th th:text="#{general.edit}">Edit</th>
+                        <th th:text="#{general.delete}">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${admin}">
+                        <td th:text="${user.userId}"></td>
+                        <td th:text="${user.firstname}"></td>
+                        <td th:text="${user.lastname}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.login}"></td>
+                        <td th:text="${user.role}"></td>
+                        <td>
+                            <span th:if="${user.approved == true}">true</span>
+                            <span th:unless="${user.approved == true}">
+                        <button th:onclick="'$(\'#usersContainer\').load(\''+@{/admin/approved(size=${admin.size}, page=${admin.number}, admin=${user.userId})}+'\')'">
+                    approved
+                </button></span>
+                        </td>
+
+                        <td><a th:href="@{/admin/edit/{id}(id=${user.userId})}">
+                            <button th:text="#{general.edit}">Edit</button>
+                        </a></td>
+                        <td> <span th:if="${user.products.isEmpty() and user.orders.isEmpty()}">
+
+               <button th:text="#{general.delete}"
+                       th:onclick="'$(\'#usersContainer\').load(\''+@{/admin/delete(size=${admin.size}, page=${admin.number}, admin=${user.userId})}+'\')'">
+                    delete
+                </button></span>
+                            <span th:unless="${user.products.isEmpty() and user.orders.isEmpty()}"></span></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div th:if="${admin.totalPages > 0}">
+                    <button th:each="pageNumber : ${pageNumbers}" th:text="${pageNumber}"
+                            th:onclick="'$(\'#usersContainer\').load(\''+@{/admin/table(size=${admin.size}, page=${pageNumber})}+'\')'">
+                        0
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <div><a th:href="@{/admin/add}">
+            <button th:text="#{general.add}">Add</button>
+        </a></div>
+    </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:fragment="master">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Wild strawberry</title>
+    <link href="../static/css/global.css" th:href="@{/css/global.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="/webjars/font-awesome/css/font-awesome.min.css"/>
+    <script src="../static/js/jquery-3.3.1.js" th:src="@{/js/jquery-3.3.1.js}"></script>
+</head>
+<body>
+<header></header>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <ul>
+<span th:if="${role == 'ADMIN'}">
+         <li><a href="/admin"><i class="fa fa-group" th:text="#{general.usersList}"></i></a></li>
+
+
+</span>
+        <span th:if="${role == 'USER' || role =='ADMIN'}">
+        <li><a href="/user/edit" ><i class="fa fa-edit" th:text="#{general.editYourself}"></i></a></li>
+        <li><a href="/user/userProducts"><i class="fa fa-list" th:text="#{general.myProducts}"></i></a></li>
+        <li><a href="/user/products"><i class="fa fa-product-hunt" th:text="#{general.products}"></i></a></li>
+        <li><a href="/user/basket"><i class="fa fa-shopping-basket" th:text="#{general.basket}"></i></a></li>
+        <li><a href="/user/userOrder"><i class="fa fa-first-order" th:text="#{general.orders}"></i></a></li>
+        <li><a href="/logout"><i class="fa fa-sign-out" th:text="#{general.logout}"></i></a></li>
+</span>
+
+<span th:if="${role == 'anonymous'}">
+        <li><a href="/home"><i class="fa fa-home" th:text="#{general.home}"></i></a></li>
+        <li><a href="/registry"><i class="fa fa-id-card" th:text="#{general.registry}"></i></a></li>
+        <li><a href="/login"><i class="fa fa-sign-in" th:text="#{general.log}"></i></a></li>
+
+</span>
+
+    </ul>
+</nav>
+<div th:include="this :: content"></div>
+<footer id="footer">© 2019 kukulka.pl</footer>
+</body>
+</html>

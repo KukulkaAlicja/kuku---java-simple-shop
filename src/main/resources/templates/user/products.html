@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:include="layout :: master">
+<body>
+<div th:fragment="content">
+    <section>
+        <table>
+            <thead>
+            <tr>
+                <th th:text="#{product.productId}">id</th>
+                <th th:text="#{product.productName}">name</th>
+                <th th:text="#{product.description}">opis</th>
+                <th th:text="#{product.price}">Price</th>
+                <th th:text="#{product.available}">Available</th>
+                <th th:text="#{product.user}">User</th>
+                <th th:text="#{product.date}">Date</th>
+
+                <th th:text="#{general.addProduct}">Add Product</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+
+                    <div th:if="${product.available == true}">
+                <td th:text="${product.productId}"></td>
+                <td th:text="${product.productName}"></td>
+                <td th:text="${product.description}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.available}"></td>
+                <td th:text="${product.user.login}"></td>
+                                        <td th:text="${product.date}"></td>
+
+                <td th:if="${login != product.user.login}">
+                    <a th:href="@{/user/products/add/{id}(id=${product.productId})}">
+                        <button th:text="#{general.addProduct}">Add Product</button></a>
+                </td>
+                    </div>
+            </tr>
+            </tbody>
+        </table>
+
+        <aside id="product">
+            <ul>
+                <!--/*@thymesVar id="basket" type="java.util.Set<pl.kukulka.kukushop.model.Product>"*/-->
+                <li th:each="product : ${basket}" th:text="${product.productName}">name</li>
+            </ul>
+        </aside>
+    </section>
+</div>
+</body>
+</html>

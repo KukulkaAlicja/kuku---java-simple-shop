@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:include="layout :: master">
+<body>
+<div th:fragment="content">
+    <section>
+        <div th:if="${userProducts.isEmpty()}"><a th:text="#{general.emptyProduct}"></a>
+            <a th:href="@{/user/userProducts/addProduct}">
+                <button th:text="#{general.add}">Add</button>
+            </a></div>
+        <div th:unless="${userProducts.isEmpty()}">
+            <td><a th:href="@{/user/userProducts/addProduct}">
+                <button th:text="#{general.add}">Add</button>
+            </a></td>
+            <table>
+                <thead>
+                <tr>
+                    <th th:text="#{product.productId}">id</th>
+                    <th th:text="#{product.productName}">name</th>
+                    <th th:text="#{product.description}">opis</th>
+                    <th th:text="#{product.price}">Price</th>
+                    <th th:text="#{product.available}">Available</th>
+                    <th th:text="#{product.date}">Date</th>
+                    <th th:text="#{general.deleteMyProduct}">Delete</th>
+                    <th th:text="#{general.editMyProduct}">Edit</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="product : ${userProducts}">
+                    <td th:text="${product.productId}"></td>
+                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td>
+                        <span th:if="${product.available == false}">false</span>
+                        <span th:unless="${product.available == false}">true</span>
+                    </td>
+                    <td th:text="${product.date}"></td>
+
+                    <td>
+                        <span th:if="${product.available == false}"></span>
+                        <span th:unless="${product.available == false}"><a
+                                th:href="@{/user/userProducts/delete/{id}(id=${product.productId})}">
+                   <button th:text="#{general.deleteMyProduct}">Delete</button>
+               </a></span>
+                    </td>
+                    <td>
+                        <span th:if="${product.available == false}"></span>
+                        <span th:unless="${product.available == false}"><a
+                                th:href="@{/user/userProducts/edit/{id}(id=${product.productId})}">
+                   <button th:text="#{general.edit}">Edit</button>
+               </a></span>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+            <div><a th:href="@{/user/userProducts/addProduct}">
+                <button th:text="#{general.add}">Add</button>
+            </a></div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:include="layout :: master">
+
+<body>
+<div th:fragment="content">
+    <section>
+        <form class="grid" style="grid-template-columns: 150px 150px 200px;"
+              action="#" th:action="@{/user/userProducts/addProduct}" th:object="${product}" method="post">
+
+            <!--<label for="productId" th:text="#{product.productId}"></label>-->
+            <input id="productId" type="hidden" th:field="*{productId}"/>
+
+            <label for="productName" th:text="#{product.productName}">productName:</label>
+            <input id="productName" type="text" th:field="*{productName}"/>
+            <label for="productName"><span th:if="${#fields.hasErrors('productName')}"
+                                           th:errors="*{productName}"></span></label>
+
+            <label for="description" th:text="#{product.description}">description:</label>
+            <input id="description" type="text" th:field="*{description}"/>
+            <label for="description"><span th:if="${#fields.hasErrors('description')}"
+                                           th:errors="*{description}"></span></label>
+
+            <label for="price" th:text="#{product.price}">price:</label>
+            <input id="price" type="text" th:field="*{price}"/>
+            <label for="price"><span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span></label>
+
+
+            <label for="available" th:text="#{product.available}">available:</label>
+            <input id="available" type="checkbox" name="available" th:value="true"/>
+            <span></span>
+
+            <input type="submit" value="Submit" th:value="#{general.submit}"/>
+            <input type="reset" value="Reset" th:value="#{general.reset}"/>
+        </form>
+
+
+    </section>
+</div>
+</body>
+</html>

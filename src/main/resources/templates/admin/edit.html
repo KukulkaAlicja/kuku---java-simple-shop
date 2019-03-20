@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:include="layout :: master">
+
+<body>
+<div th:fragment="content">
+    <section>
+        <form class="grid" style="grid-template-columns: 150px 150px;"
+              action="#" th:action="@{/admin/edit/{id}(id=${user.userId})}" th:object="${user}" method="post">
+
+            <input id="userId" type="hidden" th:field="*{userId}"/>
+
+
+            <label for="firstname" th:text="#{user.firstname}">Firstname:</label>
+            <input id="firstname" type="text" th:field="*{firstname}"/>
+
+            <label for="lastname" th:text="#{user.lastname}">Lastname:</label>
+            <input id="lastname" type="text" th:field="*{lastname}"/>
+            <input id="email" type="hidden" th:field="*{email}"/>
+            <input id="login" type="hidden" th:field="*{login}"/>
+            <input id="password" type="hidden" th:field="*{password}"/>
+
+            <label for="role" th:text="#{user.role}">role:</label>
+            <select id="role" th:field="*{role}">
+                <option th:each="role : ${roles}" th:value="${role}" th:text="${role}">USER</option>
+            </select>
+
+            <label for="approved" th:text="#{user.approved}">approved:</label>
+            <input id="approved" type="checkbox" name="approved" th:value="true"/>
+
+            <input type="submit" value="Submit" th:value="#{general.submit}"/>
+            <input type="reset" value="Reset" th:value="#{general.reset}"/>
+        </form>
+    </section>
+</div>
+</body>
+</html>

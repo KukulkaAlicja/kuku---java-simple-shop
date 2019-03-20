@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:include="layout :: master">
+
+<body>
+<div th:fragment="content">
+    <section>
+        <!--/*@thymesVar id="product" type="product"*/-->
+        <a action="#" th:action="@{/user/userProducts/edit/{id}}" th:object="${product}" method="put">
+
+        </a>
+    </section>
+</div>
+</body>
+</html>

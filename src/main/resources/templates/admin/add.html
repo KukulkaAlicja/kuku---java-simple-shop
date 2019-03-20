@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:include="layout :: master">
+
+<body>
+<div th:fragment="content">
+    <section>
+        <form class="grid" style="grid-template-columns: 150px 150px 200px;"
+              action="#" th:action="@{/admin/add}" th:object="${user}" method="post">
+            <!--<legend th:text="#{general.form}">Form</legend>-->
+
+            <!--<label for="userId" th:text="#{user.userId}"></label>-->
+            <input id="userId" type="hidden" th:field="*{userId}"/>
+
+            <!--<legend th:text="#{general.personal}">Personal data</legend>-->
+
+            <label for="firstname" th:text="#{user.firstname}">Firstname:</label>
+            <input id="firstname" type="text" th:field="*{firstname}"/>
+            <span></span>
+
+            <label for="lastname" th:text="#{user.lastname}">Lastname:</label>
+            <input id="lastname" type="text" th:field="*{lastname}"/>
+            <span></span>
+
+            <label for="email" th:text="#{user.email}">Email:</label>
+            <input id="email" type="text" th:field="*{email}"/>
+            <label for="email"><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></label>
+
+            <!--<legend th:text="#{general.loginData}">Login Data</legend>-->
+
+            <label for="password" th:text="#{user.password}">Password:</label>
+            <input id="password" type="text" th:field="*{password}"/>
+            <label for="password"><span th:if="${#fields.hasErrors('password')}"
+                                        th:errors="*{password}"></span></label>
+            <label for="login" th:text="#{user.login}">login:</label>
+            <input id="login" type="text" th:field="*{login}"/>
+            <label for="login"><span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span></label>
+
+
+            <!--<legend th:text="#{general.function}">Function</legend>-->
+            <label for="role" th:text="#{user.role}">role:</label>
+            <select id="role" th:field="*{role}">
+                <option th:each="role : ${roles}" th:value="${role}" th:text="${role}">USER</option>
+            </select>
+            <span></span>
+
+            <label for="approved" th:text="#{user.approved}">approved:</label>
+            <input id="approved" type="checkbox" name="approved" th:value="true"/>
+            <span></span>
+
+
+            <input type="submit" value="Submit" th:value="#{general.submit}"/>
+            <input type="reset" value="Reset" th:value="#{general.reset}"/>
+        </form>
+
+
+    </section>
+</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:include="layout :: master">
+<body>
+<div th:fragment="content">
+    <section>
+        <div th:if="${userOrder.isEmpty()}"><a th:text="#{general.emptyOrder}"></a>
+        </div>
+        <div th:unless="${userOrder.isEmpty()}">
+            <table>
+                <thead>
+                <tr>
+                    <th th:text="#{order.orderId}">Id</th>
+                    <th th:text="#{order.address}">Address</th>
+                    <th th:text="#{order.user}">User</th>
+                    <th th:text="#{order.product}">Products</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${userOrder}">
+                    <td th:text="${order.orderId}"></td>
+                    <td th:text="${order.address}"></td>
+                    <td th:text="${order.user.login}"></td>
+                    <td>
+                        <li th:each="product : ${order.products}"
+                            th:text="${product.productName}"></li>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+</body>
+</html>

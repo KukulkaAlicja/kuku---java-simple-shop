@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:include="layout :: master">
+<body>
+<div th:fragment="content">
+    <header>
+        <div th:text="${count}"></div>
+    </header>
+    <div id="productsContainer">
+        <section th:fragment="productsTable">
+            <table>
+                <!--/*@thymesVar id="products" type="java.util.List<pl.kukulka.kukushop.model.Product>"*/-->
+                <thead>
+                <tr>
+                    <th th:text="#{product.productId}">Product Id</th>
+                    <th th:text="#{product.productName}">Product Name</th>
+                    <th th:text="#{product.description}">Description</th>
+                    <th th:text="#{product.price}">Price</th>
+                    <th th:text="#{product.available}">Available</th>
+                    <th th:text="#{product.date}">Date</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                  <span th:if="${product.available == true}">
+                      <td th:text="${product.productId}"></td>
+                      <td th:text="${product.productName}"></td>
+                      <td th:text="${product.description}"></td>
+                      <td th:text="${product.price}"></td>
+                      <td th:text="${product.available}"></td>
+                      <td th:text="${product.date}"></td>
+
+                  </span>
+                </tr>
+                </tbody>
+            </table>
+
+            <div th:if="${products.totalPages > 0}">
+                <button th:each="pageNumber : ${pageNumbers}" th:text="${pageNumber}"
+                        th:onclick="'$(\'#productsContainer\').load(\''+@{/home/table(size=${products.size}, page=${pageNumber})}+'\')'">
+                    0
+                </button>
+            </div>
+        </section>
+
+
+    </div>
+</div>
+</body>
+</html>

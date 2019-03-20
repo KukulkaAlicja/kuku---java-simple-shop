@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" th:include="layout :: master">
+
+<body>
+<div th:fragment="content">
+    <section>
+        <!--/*@thymesVar id="user" type="user"*/-->
+        <form class="grid" style="grid-template-columns: 150px 150px 200px;"
+              action="#" th:action="@{/user/edit}" th:object="${user}" method="post">
+
+            <!--<label for="userId" th:text="#{user.userId}"></label>-->
+            <input id="userId" type="hidden" th:field="*{userId}"/>
+
+
+            <label for="firstname" th:text="#{user.firstname}">firstname:</label>
+            <input id="firstname" type="text" th:field="*{firstname}"/>
+            <span></span>
+            <label for="lastname" th:text="#{user.lastname}">lastname:</label>
+            <input id="lastname" type="text" th:field="*{lastname}"/>
+            <span></span>
+
+            <label for="email" th:text="#{user.email}">email:</label>
+            <input id="email" type="text" th:field="*{email}"/>
+            <label for="email"><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></label>
+
+
+            <label for="password" th:text="#{user.password}">password:</label>
+            <input id="password" type="password" th:field="*{password}"/>
+            <label for="password"><span th:if="${#fields.hasErrors('password')}"
+                                        th:errors="*{password}"></span></label>
+
+
+            <!--<label for="login" th:text="#{user.login}">login:</label>-->
+            <input id="login" type="hidden" th:field="*{login}"/>
+            <!--<label for="login"><span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span></label>-->
+
+
+            <input type="submit" value="Submit" th:value="#{general.submit}"/>
+            <input type="reset" value="Reset" th:value="#{general.reset}"/>
+        </form>
+    </section>
+</div>
+</body>
+</html>
